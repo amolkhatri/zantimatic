@@ -58,7 +58,7 @@ export default async function Blog({ params }) {
 }
 
 
-export async function getStaticParams() {
+export async function generateStaticParams() {
     const blogs = await fetchBlogs();
     return blogs.map((blog) => ({
         id: blog.id,
