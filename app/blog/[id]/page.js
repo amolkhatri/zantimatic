@@ -7,7 +7,6 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 export default async function Blog({ params }) {
     let id = (await params).id;
-    id = parseInt(id);
     const blog = await fetchBlog(id);
     
     return (
@@ -76,7 +75,7 @@ async function fetchBlogs() {
     const blogs = files.map((file, id) => { 
       const content = fs.readFileSync(path.join(blogsDirectory, file), "utf8");
       let md = matter(content);
-      md.id = id;
+      md.id = `${id}`;
       return md;
     });
     return blogs;

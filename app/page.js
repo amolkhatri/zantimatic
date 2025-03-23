@@ -56,7 +56,7 @@ async function fetchBlogs() {
   const blogs = files.map((file, id) => { 
     const content = fs.readFileSync(path.join(blogsDirectory, file), "utf8");
     let md = matter(content);
-    md.id = id;
+    md.id = `${id}`;
     return md;
   });
   return blogs;
