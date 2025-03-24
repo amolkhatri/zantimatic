@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run fetch-blogs && next build",
     "start": "next start",
     "lint": "next lint",
     "fetch-blogs": "node scripts/fetch-blogs.js"
   },
   "dependencies": {
     "@notionhq/client": "^2.3.0",
+    "axios": "^1.8.4",
+    "dotenv": "^16.4.7",
     "gray-matter": "^4.0.3",
     "next": "15.2.3",
     "react": "^19.0.0",

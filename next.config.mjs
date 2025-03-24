@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    "basePath": "/zantimatic",
+    "basePath": process.env.basePath
 };
 
 export default nextConfig;

@@ -3,13 +3,14 @@ import path from "path";
 import matter from "gray-matter";
 
 export async function fetchBlogs() {
-    const blogsDirectory = path.join(process.cwd(), "content");
+    const blogsDirectory = path.join(process.cwd(), process.env.blogPath);
     const files = fs.readdirSync(blogsDirectory);
-    const blogs = files.map((file) => { 
+    let blogs = files.map((file) => { 
       const fileContent = fs.readFileSync(path.join(blogsDirectory, file), "utf8");
       let { data, content } = matter(fileContent);
       return { ...data, content };
     });
+    blogs = blogs.filter((blog) => blog.status === "Published");
     return blogs;
   }
 
