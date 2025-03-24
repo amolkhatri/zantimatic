@@ -2,6 +2,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { fetchBlog, fetchBlogs } from "@/util/blog";
+
 export default async function Blog({ params }) {
     let id = (await params).id;
     const blog = await fetchBlog(id);
@@ -44,7 +45,7 @@ export default async function Blog({ params }) {
 export async function generateStaticParams() {
     const blogs = await fetchBlogs();
     return blogs.map((blog) => ({
-        id: blog.id,
+        id: blog.id
     }));
 }
 

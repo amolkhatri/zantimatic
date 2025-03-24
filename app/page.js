@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import { fetchBlogs } from "@/util/blog";
 import Header from "@/components/ui/header";
 import BlogEntry from "@/components/ui/BlogEntry";
