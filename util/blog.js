@@ -3,7 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 
 export async function fetchBlogs() {
-    const blogsDirectory = path.join(process.cwd(), process.env.blogPath);
+    const blogsDirectory = path.join(process.cwd(), process.env.BLOG_PATH);
     const files = fs.readdirSync(blogsDirectory);
     let blogs = files.map((file) => { 
       const fileContent = fs.readFileSync(path.join(blogsDirectory, file), "utf8");

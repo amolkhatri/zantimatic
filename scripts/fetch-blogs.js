@@ -7,7 +7,7 @@ dotenv.config();
 
 // Initializing a client
 const notion = new Client({
-  auth: "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",
+  auth: process.env.NOTION_API_KEY,
 })
 
 async function getBlockContent(blockId) {
@@ -93,7 +93,7 @@ async function blocksToMarkdown(blocks, slug) {
           
           if (success) {
             // Add image to markdown with caption if available
-            markdown += `![${imageCaption}](${process.env.basePath}/${relativeImagePath})`;
+            markdown += `![${imageCaption}](${process.env.BASE_PATH}/${relativeImagePath})`;
             if (imageCaption) {
               markdown += `\n*${imageCaption}*`;
             }
@@ -193,7 +193,7 @@ function createSlug(title) {
 async function saveToFile(content, filename) {
   try {
     // Create the 'content' directory if it doesn't exist
-    const contentDir = path.join(process.cwd(), process.env.blogPath);
+    const contentDir = path.join(process.cwd(), process.env.BLOG_PATH);
     try {
       await fs.mkdir(contentDir, { recursive: true });
     } catch (err) {
