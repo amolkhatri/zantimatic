@@ -1,24 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import fs from "fs";
-import path from "path";
-import * as matter from "gray-matter";
+import { fetchBlogs } from "@/util/blog";
 // Mock data - you'll want to replace this with real data from your backend/CMS
-const blogPosts = [
-  {
-    id: 1,
-    title: "Getting Started with Next.js",
-    excerpt: "Learn the basics of Next.js and how to create your first app",
-    date: "2024-03-20",
-  },
-  {
-    id: 2,
-    title: "Understanding React Hooks",
-    excerpt: "A deep dive into React Hooks and their use cases",
-    date: "2024-03-19",
-  },
-  // Add more blog posts as needed
-];
 
 export default async function Home() {
   const blogPosts = await fetchBlogs();
@@ -48,16 +31,4 @@ export default async function Home() {
       </main>
     </div>
   );
-}
-
-async function fetchBlogs() {
-  const blogsDirectory = path.join(process.cwd(), "content");
-  const files = fs.readdirSync(blogsDirectory);
-  const blogs = files.map((file, id) => { 
-    const content = fs.readFileSync(path.join(blogsDirectory, file), "utf8");
-    let md = matter(content);
-    md.id = `${id}`;
-    return md;
-  });
-  return blogs;
 }

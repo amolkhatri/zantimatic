@@ -1,10 +1,7 @@
-import fs from "fs";
-import path from "path";
-import * as matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-
+import { fetchBlog, fetchBlogs } from "@/util/blog";
 export default async function Blog({ params }) {
     let id = (await params).id;
     const blog = await fetchBlog(id);
@@ -60,23 +57,7 @@ export default async function Blog({ params }) {
 export async function generateStaticParams() {
     const blogs = await fetchBlogs();
     return blogs.map((blog) => ({
-        id: blog.id,
+        id: blog.data.id,
     }));
 }
 
-async function fetchBlog(id) {
-  const blogs = await fetchBlogs();
-  return blogs.find((blog) => blog.id === id);
-}
-
-async function fetchBlogs() {
-    const blogsDirectory = path.join(process.cwd(), "content");
-    const files = fs.readdirSync(blogsDirectory);
-    const blogs = files.map((file, id) => { 
-      const content = fs.readFileSync(path.join(blogsDirectory, file), "utf8");
-      let md = matter(content);
-      md.id = `${id}`;
-      return md;
-    });
-    return blogs;
-  }
