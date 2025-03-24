@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function BlogEntry({ post }) {
   return (
     <article className="mb-8 border-b pb-6">
@@ -46,13 +48,13 @@ export default function BlogEntry({ post }) {
         
         {/* Read More Link */}
         <div className="pt-2">
-          <a 
+          <Link
             href={`/blog/${post.slug || post.id}`} 
             className="text-primary font-medium hover:underline"
             aria-label={`Read more about ${post.title}`}
           >
             Read more →
-          </a>
+          </Link>
         </div>
       </div>
     </article>
