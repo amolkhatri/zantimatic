@@ -14,47 +14,50 @@ export default function BlogEntry({ post }) {
       )}
       
       <div className="space-y-3">
-        {/* Date and Tags in a single row */}
-        <div className="flex flex-wrap items-center justify-between text-sm">
-          {post.date && (
-            <time className="text-gray-500" dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </time>
-          )}
-          
-          {/* Tags */}
-          {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {post.tags.map((tag, index) => (
-                <span key={index} className="text-primary">
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
-        
-        {/* Title */}
-        <h2 className="text-xl font-bold">{post.title}</h2>
+        {/* Title - Now Clickable */}
+        <h2 className="text-xl font-bold">
+          <Link 
+            href={`/blog/${post.slug || post.id}`}
+            className="hover:text-primary transition-colors"
+            aria-label={`Read article: ${post.title}`}
+          >
+            {post.title}
+          </Link>
+        </h2>
         
         {/* Description/Excerpt */}
         {post.description && (
           <p className="text-gray-700">{post.description}</p>
         )}
         
-        {/* Read More Link */}
-        <div className="pt-2">
-          <Link
-            href={`/blog/${post.slug || post.id}`} 
-            className="text-primary font-medium hover:underline"
-            aria-label={`Read more about ${post.title}`}
-          >
-            Read more →
-          </Link>
+        {/* Date and Tags in the same row */}
+        <div className="flex justify-between items-center pt-2">
+          {/* Date */}
+          <div className="text-sm">
+            {post["published date"] && (
+              <time className="text-gray-500" dateTime={post["published date"]}>
+                {new Date(post["published date"]).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            )}
+          </div>
+          
+          {/* Tags - now on the right */}
+          <div className="flex flex-wrap gap-2 justify-end">
+            {post.tags && post.tags.length > 0 && 
+              post.tags.map((tag, index) => (
+                <span 
+                  key={index} 
+                  className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary"
+                >
+                  #{tag}
+                </span>
+              ))
+            }
+          </div>
         </div>
       </div>
     </article>
