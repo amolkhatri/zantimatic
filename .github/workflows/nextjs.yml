@@ -73,13 +73,6 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-      - name: Create .env file
-        run: |
-          echo "Creating .env file from GitHub secrets"
-          touch .env
-          echo "NOTION_API_KEY=${{ env.NOTION_API_KEY }}" >> .env
-          echo "environment variables: "
-          cat .env
       - name: Fetch blog content
         run: ${{ steps.detect-package-manager.outputs.runner }} npm run fetch-blogs
       - name: Build with Next.js
