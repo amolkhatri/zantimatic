@@ -3,6 +3,7 @@ import Link from 'next/link';
 export default function Header() {
   return (
     <header className="bg-base-100 shadow-md">
+      
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
