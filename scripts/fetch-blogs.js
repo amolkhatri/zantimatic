@@ -193,7 +193,7 @@ function createSlug(title) {
 async function saveToFile(content, filename) {
   try {
     // Create the 'content' directory if it doesn't exist
-    const contentDir = path.join(process.cwd(), 'content');
+    const contentDir = path.join(process.cwd(), process.env.blogPath);
     try {
       await fs.mkdir(contentDir, { recursive: true });
     } catch (err) {
