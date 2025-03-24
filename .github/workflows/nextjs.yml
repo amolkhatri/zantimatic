@@ -77,10 +77,9 @@ jobs:
         run: |
           echo "Creating .env file from GitHub secrets"
           touch .env
-          echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> .env
-          echo "NOTION_API_KEY=${{ secrets.NOTION_API_KEY }}" >> .env
-          echo "BASE_PATH=${{ secrets.BASE_PATH }}" >> .env
-          echo "BLOG_PATH=${{ secrets.BLOG_PATH }}" >> .env
+          echo "NOTION_API_KEY=${{ env.NOTION_API_KEY }}" >> .env
+          echo "environment variables: "
+          cat .env
       - name: Fetch blog content
         run: ${{ steps.detect-package-manager.outputs.runner }} npm run fetch-blogs
       - name: Build with Next.js
