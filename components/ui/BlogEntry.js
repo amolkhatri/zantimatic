@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function BlogEntry({ post }) {
+export default function BlogEntry({ post, href}) {
   return (
     <article className="mb-8 border-b pb-6">
       {post.coverImage && (
@@ -17,7 +17,7 @@ export default function BlogEntry({ post }) {
         {/* Title - Now Clickable */}
         <h2 className="text-xl font-bold">
           <Link 
-            href={`/blog/${post.slug || post.id}`}
+            href={href}
             className="hover:text-primary transition-colors"
             aria-label={`Read article: ${post.title}`}
           >

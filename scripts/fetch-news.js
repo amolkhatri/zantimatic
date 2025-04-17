@@ -196,7 +196,7 @@ function createSlug(title) {
 async function saveToFile(content, filename) {
   try {
     // Create the 'content' directory if it doesn't exist
-    const contentDir = path.join(process.cwd(), process.env.BLOG_PATH);
+    const contentDir = path.join(process.cwd(), process.env.NEWS_PATH);
     try {
       await fs.mkdir(contentDir, { recursive: true });
     } catch (err) {
@@ -212,12 +212,13 @@ async function saveToFile(content, filename) {
 }
 
 async function main() {
-  //clear the blogs directory
-  const blogsDir = path.join(process.cwd(), process.env.BLOG_PATH);
-  await fs.rm(blogsDir, { recursive: true, force: true });
+    //clear the news directory
+    const newsDir = path.join(process.cwd(), process.env.NEWS_PATH);
+    await fs.rm(newsDir, { recursive: true, force: true });
+
 
   const myPage = await notion.databases.query({
-    database_id: "1bfc8a89eb2a8062af70f17df8c29e0d",
+    database_id: "1d8c8a89eb2a806c9ce0d5e7e67de010",
   })
 
   const allPages = myPage.results
