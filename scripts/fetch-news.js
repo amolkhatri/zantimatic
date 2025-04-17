@@ -214,7 +214,13 @@ async function saveToFile(content, filename) {
 async function main() {
     //clear the news directory
     const newsDir = path.join(process.cwd(), process.env.NEWS_PATH);
-    await fs.rm(newsDir, { recursive: true, force: true });
+    try {
+      await fs.rm(newsDir, { recursive: true, force: true });
+    } catch (err) {
+      if (err.code !== 'EEXIST') {
+        console.error(`Error clearing news directory:`, err);
+      }
+    }
 
 
   const myPage = await notion.databases.query({

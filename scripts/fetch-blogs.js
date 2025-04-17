@@ -214,7 +214,13 @@ async function saveToFile(content, filename) {
 async function main() {
   //clear the blogs directory
   const blogsDir = path.join(process.cwd(), process.env.BLOG_PATH);
-  await fs.rm(blogsDir, { recursive: true, force: true });
+  try {
+    await fs.rm(blogsDir, { recursive: true, force: true });
+  } catch (err) {
+    if (err.code !== 'EEXIST') {
+      console.error(`Error clearing blogs directory:`, err);
+    }
+  }
 
   const myPage = await notion.databases.query({
     database_id: "1bfc8a89eb2a8062af70f17df8c29e0d",
